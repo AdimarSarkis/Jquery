@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Eventos #01</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+    <script src='js/jquery.js'></script>
+    <style>
+        input {
+            font-size: 2em;
+        }
+    </style>
+</head>
+
+<body class='conteudo exercicio'>
+    <h1>Eventos #01</h1>
+    <div id='posicao'></div>
+    <div id='cliques'>Cliques: 0</div>
+    <input type="text" placeholder="Cor de Background">
+
+    <script>
+        // ---------------------Evento movimento do mouse ----------------//
+        function mostrarPosicaoMouse(e){
+            $('#posicao').html(`x: ${e.clientX} y: ${e.clientY}`)
+        }
+        $('body').on('mousemove', mostrarPosicaoMouse) // a função on registra evento dentro do jQuery, a primeira parte é
+        // o nome do evento como uma string e a segunda uma função
+        
+        $("#posicao").mouseover(e => {
+            $('body').off('mousemove', mostrarPosicaoMouse) // a função off vai tirar o evento, nesse caso, 
+            // quando o mouse estiver em cima da div        
+        })
+        $('#posicao').mouseleave(e => {
+            $('body').mousemove(mostrarPosicaoMouse)
+        })
+        // ---------------------------------------------------------------//
+        
+        // ---------------------Evento clique ----------------//
+        let cliques = 0
+        $('body').click(e => {
+            $('#cliques').html(`Cliques: ${++cliques}`)
+        })
+        // ---------------------------------------------------------------//
+        
+        // ---------------------Evento Trocar backgorund ----------------//
+        let backgroundOriginal = $('body').css('backgound-color') // leu o background atual
+
+        $('input').keyup(function(e){ // valor atualizado para cada tecla, diferente do down e press, que tem um atraso de uma tecla
+            const valor = $(this).val()
+            // this do function é o windonw, diferente da função arrow
+            if(valor.match(/#[\da-fA-F]{3,6}/)){ // de 3 a 6 podendo ser a até f e A ate F
+                $('body').css('background-color', valor)
+            } else {
+                $('body').css('background-color', backgroundOriginal)
+            }
+        })
+        // ---------------------------------------------------------------//
+        </script>
+</body>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Entendendo jQuery</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+    <script src="js/jquery.js"></script>
+</head>
+
+<body class="conteudo exercicio">
+    <h1>Entendendo jQuery</h1>
+    <div>1</div>
+    <div>2</div>
+
+    <script>
+        $('div').hide(5000) // esconde dps de 5000ms todas as divs
+            .show(5000).fadeOut(5000).fadeIn(5000)
+
+        console.log($('div').get(0)) // pega o indice 0 que veio da lista div
+                                    // dps de usar o get, não pode-se usar as funçoes
+                                    // anteriores, pois o Jquery trablha como se fosse
+                                    // um objeto e dentro do objeto tem as coisas para
+                                    // a manipulação da DOM
+        console.log($.isEmptyObject({nome: null}))
+        console.log(jQuery.inArray(3,[1,2,3])) // -1 se não estiver no array ou indiceque tem
+
+        $.fn.fundoVerde = function() {
+            this.css('background-color', 'green')
+            return this
+        }
+
+        $('body').fundoVerde().fadeOut(5000)
+    </script>
+</body>
